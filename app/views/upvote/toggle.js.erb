@@ -1,0 +1,13 @@
+<% if @isupvote %>
+$('#upvoteq_<%= @question.id%>')..css('color','blue');
+$('#upcountq_<%= @question.id%>').html(<%=@question.upvote_qs.count%>);
+
+noty({text: 'question was upvoted', type: 'alert'});
+
+<% else %>
+
+$('#upvoteq_<%= @question.id%>')..css('color','black');
+$('#upcountq_<%= @question.id%>').html(<%=@question.upvote_qs.count%>);
+
+noty({text: 'question was removed as upvoted', type: 'alert'});
+<% end %>

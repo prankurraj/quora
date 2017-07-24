@@ -1,0 +1,9 @@
+<% if @comment.errors.any?%>
+noty({text: "<%=@comment.errors.full_messages.first%>", type: 'error'});
+<%else%>
+
+noty({text: 'comment added', type: 'alert',timeout:1000});
+$('#comment_<%=@answer.id%>').append("<%= escape_javascript (render 'home/comment', comment:@comment) %>");
+$('#comment_content_<%=@answer.id%>').val("");
+<%end%>
+// ,answers: @answers

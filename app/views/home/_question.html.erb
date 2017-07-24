@@ -1,0 +1,54 @@
+<div class="questions">
+		<h1><%=question.content%>?</h1>
+		<div id="arr">
+		<div class="upvoteqbutton">
+			<%= link_to "UpVote", url_for(controller: 'upvote', action: 'toggle', question_id: question.id), method: :post, id: "upvoteq_#{question.id}", remote: true%>
+			<span id="upcountq_<%=question.id%>"> <%=question.upvote_qs.count%> </span>
+			</div>
+			<div class="downvoteqbutton">
+				<%= link_to "Downvote", url_for(controller: 'downvote', action: 'toggleq', question_id: question.id), method: :post, id: "downvoteq_#{question.id}", remote: true%>
+			<span id="downcountq_<%=question.id%>"> <%=question.downvoteqs.count%> </span>
+
+			</div>
+		</div>
+		<div class="authorname">
+		<small><i><%=question.user.first_name%>
+		<%=question.user.last_name%>
+		<%=question.created_at.strftime("%b %d %Y")%></i></small>
+		</div>
+<%if current_user!=nil%>
+				<div class="answerget">
+			<%@answer=Answer.new%>
+			<%= form_for @answer , remote: true do |answer| %>
+					<!-- answers -->
+			
+				<%= answer.text_area :content, id: "answer_content_#{question.id}" %>  <br>
+				<%=answer.hidden_field :question_id, :value => question.id%>
+				<%= answer.submit  id: 'create_answer_submit' %>
+			<%end%>
+			<% if @answer.errors.any? %>
+			    <% @answer.errors.full_messages.each do |message| %>
+			    <script type="text/javascript">
+					noty({text: '<%= message %>', type: 'error'});
+				</script>
+  				<% end %>
+ 			 <% end %>
+
+			</div>
+<%end%>
+			<div id="answer_<%=question.id%>">
+		<%question.answers.each do |showanswer|%>
+		<small>answered by---</small>
+
+		<%=render 'answer', showanswer: showanswer %>	
+
+		<%end%>
+			</div>
+
+
+</div>
+		
+
+
+		
+

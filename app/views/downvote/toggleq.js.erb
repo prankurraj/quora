@@ -1,0 +1,13 @@
+<% if @isdownvote %>
+$('#downvoteq_<%= @question.id%>').css('color','red');
+$('#downcountq_<%= @question.id%>').html(<%=@question.downvoteqs.count%>);
+
+
+noty({text: 'question was downvoted', type: 'alert'});
+
+<% else %>
+
+$('#downvoteq_<%= @question.id%>').css('color','black');
+$('#downcountq_<%= @question.id%>').html(<%=@question.downvoteqs.count%>);
+noty({text: 'question was removed downvoted', type: 'alert'});
+<% end %>

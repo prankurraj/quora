@@ -1,0 +1,36 @@
+			<br>
+			<div class="answershow"> 
+
+			<%=showanswer.content%>
+
+			<br>
+			<div class="answerauth">
+			
+			<small><i><%=showanswer.user.first_name%>
+			<%=showanswer.user.last_name%></i></small>
+			</div>
+			<%if current_user!=nil%>
+
+			<div id="commentget">
+				<%@comment=Comment.new%>
+			<%= form_for @comment, remote: true do |comment| %>
+					<!-- answers -->
+			
+				<%= comment.text_area :content, id: "comment_content_#{showanswer.id}"%>  <br>
+				<%=comment.hidden_field :answer_id, :value => showanswer.id%>
+				<%= comment.submit  id: 'create_answer_submit' %>
+			<%end%>
+			</div>
+			<%end%>
+					<div id="comment_<%=showanswer.id%>">
+
+							<%showanswer.comments.each do |comment|%>
+							<small>comment by---</small>
+							<%=render 'comment', comment: comment %>	
+
+							<%end%>
+					</div>
+
+
+				</div>
+

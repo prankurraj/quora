@@ -1,0 +1,10 @@
+<% if @answer.errors.any?%>
+noty({text: "<%=@answer.errors.full_messages.first%>", type: 'error'});
+<%else%>
+
+noty({text: 'answer was posted', type: 'alert'});
+$('#answer_<%=@question.id%>').append("<%= escape_javascript (render 'home/answer', showanswer: @answer) %>");
+$('#answer_content_<%=@question.id%>').val("");
+
+// ,answers: @answers
+<%end%>

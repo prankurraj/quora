@@ -1,0 +1,8 @@
+<% if @question.errors.any?%>
+noty({text: "<%=@question.errors.full_messages.first%>", type: 'error'});
+<%else%>
+noty({text: 'question was posted', type: 'alert'});
+$('#allq').prepend("<%= escape_javascript (render 'home/question', question: @question) %>");
+$('#question_content').val("");
+<%end%>
+// ,answers: @answers
